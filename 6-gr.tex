@@ -1,0 +1,121 @@
+%! TEX root = 0-main.tex
+\chapter{General Relativity}
+\section{Equivalence Principle}
+Einstein's Equivalence principle states that a (small enough) frame in a gravitational field is indistinguishable from a frame with the same acceleration as the gravitational field's\footnote{However, if the frame is large enough you can begin to measure the variation in the field, namely tidal forces}.
+More rigourously, locally in spacetime, the laws of physics are invariant under the Poincar\'e group; locally, spacetime looks minkowskian. The weak equivalence principle (equivalence of inertial and gravitational mass) follows naturally from this equivalence principle.
+
+Two ways to test this are the effects of gravity on light. If a gravitational frame is equivalent to a uniformly accelerating frame, we should expect light perpendicular to the field to deflect downward, and the light parallel to the field to be doppler shifted. Indeed, these two effects have been measured and confirmed experimentally. We interpret this as rather than gravity acting on the light, the light follows a straight-line path in spacetime.
+
+\section{Curved Spacetime}
+Recall our gravitational action
+\[S = -m\int\sqrt{-\eta_{\mu\nu}\d{x^\mu}\d{x^\nu}}\]
+In general relativity, we replace the constant Minkowski metric with one that depends on the position in spacetime---a general metric tensor
+\begin{equation}
+	S = -m\int\sqrt{-g_{\mu\nu}\d{x^\mu}\d{x^\nu}}
+\end{equation}
+
+\subsubsection{Free Particle in 1D}
+Consider a particle in an accelerating frame. In newtonian mechanics, we transform the frames via
+\[y = x-\frac{1}{2}at^2\]
+so
+\[\ddot y = \ddot x - a\]
+We observe a fictitious force due to the acceleration of the frame.
+
+If we instead consider the same system in relativity, we have
+\[\d\tau^2 = -\eta_{\rho\sigma}\d{y^\rho}\d{y^\sigma}\]
+so
+\[1= \der{y^\rho}{\tau}\der{y_\rho}{\tau}\]
+and 
+\[\der{y^\rho}{\tau2} = 0\]
+If we consider 
+\[y ^\rho = y^\rho(x^\mu)\]
+we find
+\[\der{y^\rho}{\tau2} = \pder{y^\rho}{x^\mu}\der{x^\mu}{\tau2} + \pder{^2y^\rho}{x^\mu \partial x^\nu}\der{x^\mu}{\tau}\der{x^\nu}{\tau}\]
+Plugging in \(\d[2]{y^\rho}{\d{\tau^2}}\), and using 
+\[\pder{x^\lambda}{x^\mu} = \pder{x^\lambda}{y^\rho}\pder{y^\rho}{x^\mu} = \delta_\mu^\lambda\]
+we find
+\begin{equation}
+	\der{x^\lambda}{\tau2} + \left(\pder{x^\lambda}{y^\rho}\pder{^2y^\rho}{x^\mu\partial x^\nu}\right)\der{x^\mu}{\tau}\der{x^\nu}{\tau} = 0\label{eq6:accel}
+\end{equation}
+From the proper time, we find the metric of a constantly accelerating frame:
+\[\d{\tau}^2 = \eta_{\rho\sigma}\d{y^\rho}\d{y^\sigma} = \eta_{\rho\sigma}\pder{y^\rho}{x^\mu}\pder{y^\sigma}{x^\nu}\d{x^\mu}\d{x^nu}\]
+\begin{equation}
+	g_{\mu\nu} = \eta_{\rho\sigma}\pder{y^\rho}{x^\mu}\pder{y^\sigma}{x^\nu}
+\end{equation}
+Thus, we see that the metric is locally just a coordinate transformation from the minkowski metric. 
+
+Further, we see that the observer sees a fictituous force in the accelerating frame.
+
+From Equation~\ref{eq6:accel}, we define the Christoffel symbol such that
+\begin{equation}
+	\der{x^\lambda}{\tau2} + \Gamma_{\rho\nu}^\lambda \der{x^\rho}{\tau}\der{x^\nu}{\tau} = 0\label{eq6:geodesic}
+\end{equation}
+so
+\begin{equation}
+	\Gamma_{\mu\nu}^\lambda = \pder{x^\lambda}{y^\rho}\pder{^2 y^\rho}{x^\mu \partial x^\nu}
+\end{equation}
+Equation~\ref{eq6:geodesic} is the \emph{geodesic equation}, and gives us our equations of motion. Recall we can derive this equation from applying the Euler equation to the Lagrangian,
+\[L = -m\sqrt{g_{\mu\nu}\der{x^\mu}{\tau}\der{x^\nu}{\tau}}\]
+In doing so, we see another expression for the Christoffel symbol in terms of derivatives of the metric:
+\begin{equation}
+	\Gamma_{\rho\nu}^\lambda = \frac{1}{2}g^{\lambda\alpha}\left(\partial_{\nu}g_{\alpha\rho}+\partial_\rho g_{\alpha\nu}-\partial_{\alpha}g_{\rho\nu}\right)
+\end{equation}
+The Christoffel symbol offers a mathematical description of the equivalence principle. 
+
+\subsubsection{2-Sphere}
+Consider a 2-sphere where the line element is given
+\[\d{s}^2 = a\left(\d{\theta}^2\sin^2\theta\d\phi^2\right)\]
+To find a transformation to a local inertial frame, we need to have a diagonal metric with vanishing first derivative. We consider the \emph{Riemann normal coordinates}
+\begin{align*}
+	x&=a\theta\cos\phi\\
+	y&=a\theta\sin\phi
+\end{align*}
+so
+\[\theta = \frac{\sqrt{x^2+y^2}}{a}\qquad\qquad \phi = \tan^{-1}\left(\frac{y}{x}\right)\]
+and
+\[\d\theta = \frac{x}{a\sqrt{x^2+y^2}}\d{x} + \frac{y}{a\sqrt{x^2+y^2}}\d{y}\]
+\[\d\phi = -\frac{y}{x^2+y^2}\d{x} + \frac{x}{x^2+y^2}\d{y}\]
+so our metric becomes (to leading order)
+\[g(x,y) = \begin{bmatrix}1-\frac{2y^2}{3a^2} & \frac{2xy}{3a^2}\\\frac{2xy}{3a^2} & 1-\frac{2x^2}{3a^2}\end{bmatrix}\]
+At \(\theta = 0\), we have \(x=y=0\) and our metric reduces to the identity.
+\section{Lightcones and Worldlines}
+We can give each point on a worldline a local light cone. These light cones are at \SI{45}{\degree} angles to the worldline as given by the local metric. The light cones are found by setting
+\[\d{s}^2 = 0\]
+
+\section{Alcubierre Metric}
+The line element in the Alcubierre Metric is given
+\begin{equation}
+	\d{s}^2 = -\d{t}^2 \left[\d{x}-V_s(t)f(r_s)\d{t}\right]^2 + \d{y}^2 + \d{z}^2
+\end{equation}
+The function \(f(r_s)\) is the ``shape'' of a warp bubble, with the properties
+\[f(0) = 1\]
+\[f(r_s > R) = 0\]
+where \(r_s\) is the distance to the centre of the bubble
+\[r_s^2 = \left(x-x_s(t)\right)^2 + y^2 + z^2\]
+and \(V_s(t)\) is the speed of the ship.
+The light cone is given
+\[\der{x}{t} = \pm 1 + V(t)f(r_s)\]
+which can be greater than \(c=1\). However,
+\[V_s-1<V_s<V_s+1\]
+and so the ship only travels within the light cone.
+
+If we consider the light cone inside the bubble, the light cone is tipped forward. However, if light is inside the bubble, we find that the light cannot touch the entire bubble; someone inside the bubble cannot be the one who creates the bubble.
+
+Writing out the metric, we find
+\[g_{\alpha\beta} = \begin{bmatrix}
+	V^2_s(t)-1 & -V_s(t) & 0 & 0\\
+	-V_s(t) & 1 & 0 & 0\\
+	0 & 0 & 1 & 0\\
+	0 & 0 & 0 & 1
+\end{bmatrix}\]
+For a constant velocity \(V_s\), we further have
+\[\partial_i g_{jk} = 0\]
+so the ship feels no force; it sits still as the bubble carries it forward.
+
+Further, considering the proper time and \(V_s(t) = \der{x}{t} = V_s\) near the centre of the bubble, \(f\to 0\), we find
+\begin{align*}
+	\tau = \int_0^T\sqrt{\d{t}^2 - \left[\d{x}-V_s \d{t}\right]^2}\\
+	&=\int_0^T\sqrt{\d{t^2}}\\
+	&=T
+\end{align*}
+and so the proper time isn't altered. 

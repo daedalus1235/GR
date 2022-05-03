@@ -1,0 +1,187 @@
+%! TEX root = 0-main.tex
+\chapter{Geometry}
+In order to describe GR properly, we need to have a proper grasp of geometry. Rather than viewing a sphere as a round surface, we need rather understand it as a 2D surface rather than an object embedded in 3D space; we need to understand the differential geometry of space.
+
+Consider an ant living on a sphere of radius \(r\). If the ant is at the polar angle \(\theta\) and determines a circle of constant \(\theta\), the ant can infer the curvature of the surface it lives on. The radius of the circle can be found
+\[r = a\theta\]
+while the circumference of the circle is given
+\[C = 2\pi (a\sin\theta) = 2\pi a\sin\left(\tfrac{r}{a}\right)\]
+In the limit \(a\gg r\), we can expand the sine about small angles as
+\[C \to 2\pi r - \frac{1}{3}\pi r\left( \tfrac{r}{a}\right)^2 + \mathscr O\left[\left(\tfrac{r}{a}\right)^5\right]\]
+
+\section{Line Elements}
+Such geometric tests can be extended to the infinitessimal neighbourhood of a point via the \emph{line element}. If we consider two points in 2D Euclidian space, \(p,q\), we can find the distance between the two points as 
+\[\Delta s^2 = \Delta x^2 + \Delta y^2\]
+Of course, we can do the same in the infinitessimal limit of pythagoran theorem:
+\[\d{s}^2 = \d{x}^2 + \d{y}^2\]
+However, this is only true in flat euclidian space. For instance, if we instead use polar coordinates \((r,\theta)\), our line element becomes
+\[\d{s}^2 = \d{r}^2 + r^2\d\theta^2\]
+
+We can integrate over these line elements to find the lengths of curves:
+\[L = \int_\gamma\d{s}\]
+for the case of a circle:
+\[C = \oint_\gamma \d{s} = \oint_\gamma\d{x} \sqrt{1+\left(\der{y}{x}\right)^2} = \oint_\gamma\d\theta\sqrt{r^2+\left(\der{r}{\theta}\right)^2}\]
+However, in the second case, we have \(\der{r}{\theta} = 0\) for the circular curve \(\gamma\) and thus it reduces to 
+\[C = \oint_\gamma R\d\theta = 2\pi R\]
+We see that different coordinate systems lend themselves to different problems.
+
+Let us now consider the line element on a 2-sphere. We leave it as an exercise to show
+\[\d{s}^2 = r^2\d{\theta}^2 + (r\sin\theta)^2\d\phi^2\]
+We see that the line element is dependent on the size of the 2-sphere.
+
+The most important feature of a line element is that it is \emph{invariant}; its magnitude is the same no matter what coordinate system is used. Let us return to the simple coordinate systems of cartesian and polar. We have the the relations
+\[x = r\cos\theta \qquad y = r\sin\theta\]
+Trivially, we have 
+\[\d{x} = \cos\theta\d r -r\sin\theta\d\theta\]
+\[\d y = \sin\theta\d r +r\cos\theta\d\theta\]
+we can then show
+\begin{align*}
+	\d x^2+\d y^2 &= (\cos\theta \d r - r\sin\theta\d\theta)^2 + (\sin\theta \d r + r\cos\theta\d\theta)^2\\
+		      &=\d r^2 + r^2\d\theta^2
+\end{align*}
+
+\section{Invariance and Geometry}
+Consider a point \(P\) with a frame \((x,y)\) and a rotated frame \((y', x')\). These two coordinates are related by a rotation, which is a linear transformation. From simple trigonometry we can write
+\begin{align*}
+	x' &= \cos \theta x + \sin\theta y\\
+	y' &= -\sin\theta x + \cos\theta y
+\end{align*}
+Naturally, we can write this as a matrix:
+\[ \begin{bmatrix}
+	x'\\y'
+\end{bmatrix} = \begin{bmatrix}
+\cos\theta &\sin\theta \\
+-\sin\theta & \cos\theta
+\end{bmatrix} \begin{bmatrix}
+x\\y
+\end{bmatrix}\]
+Thus, we can write
+\begin{equation}
+	R(\theta) \simeq \begin{bmatrix}
+		\cos\theta & \sin\theta\\
+		-\sin\theta & \cos\theta
+	\end{bmatrix}
+\end{equation}
+so
+\begin{equation}
+	\vb r' = R(\theta)\vb r
+\end{equation}
+if we consider a new point \(Q\) at \(\vb r_Q\simeq \vect{\tilde x,\tilde y}\) we see that it transforms just as \(P\). Finding the distance between these two points, we find
+\[(\vb r_Q'-\vb r_P') = R(\theta)[\vb r_Q-\vb r_P]\]
+so
+\[\d{s}^2=\norm{\vb r_Q'-\vb r_P'}^2 = [\vb r_Q-\vb r_P]\T R\T(\theta)R(\theta)[\vb r_Q-\vb r_P] = \norm{\vb r_Q-\vb r_P}^2\]
+so that under a rotation the line element is unchanged.
+
+More generally, if we consider an inner product between two vectors:
+\[\vb p\T \vb q= p^1q^1+p^2q^2\]
+we see that this is preserved under rotations:
+\[{\vb p'} \T \vb q' = \vb p\T R\T R \vb q = \vb p\T\vb q\]
+Operators that satisfy \(O\T O\) are orthogonal, and are defined by \(\det O = \pm 1\).  For rotations, we consider the negative determinant, and are left with \(SO(2)\), or the special orthogonal group in dimension 2.
+
+\section{Vectors}
+We now consider the line element. Consider 
+\begin{equation}
+	\d{\vb x} = \begin{bmatrix}
+		\d{x^1}\\\d{x^2}
+	\end{bmatrix}
+\end{equation}
+It has the property where 
+\[\d{s}^2 = \d{\vb x}\T\d{\vb{x}}\]
+This provides a basis for our coordinate system. In this sense, \(\d{\vb x}\) is the prototypical template for a vector; a vector is only a vector if it transforms like \(\d{\vb x}\).
+
+Consider two observers; one in a rotated frame and relative to another. The vector field is given
+\[\vb v(\vb x') = R\vb v(\vb x)\]
+Physics should not depend on the observer; the laws of physics should be invariant. If we apply a rotation to Newton's law
+\[mR\vb a = R\vb F\]
+and so
+\[m\vb a' = \vb F'\]
+or Newton's law maintains its form. Thus, we say the equation is \emph{covariant}, as it transforms the same way as the vectors.
+
+\begin{aside}[\(N\)-Dimensions]
+Consider an \(N\) dimensional space. We can write the line element for euclidean space as
+\[\d{s}^2 = \sum_{i=1}^D (\d{x^i})^2\]
+Similarly, a matrix can be represented as
+\[M^{i}_j\]
+Where we begin to use Einstein summation. We can write a transformation as
+\[\vb u =M\vb v\then u^i = M^i_jv^j\]
+A useful mnemonic is ``upper indices go up and down, lower indices go left right.''
+\end{aside}
+
+Note that if we have a vector \(\vb p' = R\vb p\), that a vector 
+\[\vb q = \begin{bmatrix}
+	a p^1\\
+	bp^2
+\end{bmatrix}\]
+it is only a vector if \(a=b\). This is because if we write \(\vb q = A\vb p\), if we transform \(\vb p\) then convert it to \(\vb q\), we do not in general get the same result as if we converted \(\vb p\) to \(\vb q\) then transformed it. Thus, \(\vb q=A\vb p\) does \emph{not} transform like a vector. However, note one important subtlety. The transformation that defines what a vector is in this case is not in fact represented by \(R\); rather, \(R\) \emph{restricted} to \(p\) is a representation of the transformation law. In general, this law need not be linear.
+
+For our purposes, an object \(V^\mu\) is a vector if it transforms like
+\begin{equation}
+	V'^\nu = \Lambda_\mu^\nu V^\mu
+\end{equation}
+
+\subsection{Contravariance}
+Consider a general change of variable, where we obtain
+\[\d{x'^i} = \pder{ x'^i}{x^j}\d{x^j}\]
+we have
+\[S^i_j=\pder{x'^i}{x^j}\]
+More generally,
+\[\partial_i =\pder{}{x^i}\]
+and 
+\[\partial_{i}' = \pder{}{x'^i} = \pder{x^j}{x'^i}\pder{}{x_j} = (S^{-1})\pder{}{x^j} = (S^{-1})_i^j\partial_j\]
+We see that the \emph{contravariant} \(\partial_i\) transforms with the inverse of the transform that the \emph{covariant} \(\d{x^i}\) transforms with.
+
+\section{Metric Tensor}
+Equipped with our new-found knowledge of tensors we can redefine the line element in terms of the \emph{metric tensor} \(g_{\mu\nu}\):
+\begin{equation}
+	\d{s}^2 = g_{\mu\nu}\d{x^\mu}\d{x^\nu}
+\end{equation}
+For example, the metric in euclidian spacetime is given \(g_{\mu\nu} = \delta_{\mu\nu}\), while the metric for the 2-sphere is given
+\[g_{\mu\nu}\simeq \begin{bmatrix}
+	a^2 & 0 \\ 0 & a^2\sin^2\theta
+\end{bmatrix}\]
+and for polar coordinates the metric is given
+\[g_{\mu\nu}\simeq \begin{bmatrix}
+	1 & 0\\0& r^2
+\end{bmatrix}\]
+In GR, we will have a symmetric metric---that is, we will have 
+\begin{equation}
+	g_{\mu\nu} = g_{\nu\mu}
+\end{equation}
+This is the result of a few key assumptions we will discuss later.
+
+Given a metric in one coordinate system and a change of coordinates to another system, we can transform the metric to gain the metric in the new system. Consider an arbitrary transformation
+\[x^\mu\to x'^\mu\]
+The line element is invariant under such a transformation. Thus,
+\begin{align*}
+	\d{s^2}= g_{\mu\nu}\d{x^\mu}\d{x^\nu} &= g'_{\mu\nu}\d{x'^\mu}\d{x'^\nu}\\
+					      &=g'_{\mu\nu} (\partial_\rho x'^\mu )(\partial_\sigma x'^\nu) \d{x^\sigma}\d{x^\nu}\\
+\end{align*}
+or alternatively
+\begin{equation}
+	g_{\rho\sigma}'= g_{\mu\nu}(\partial_\rho' x^\sigma)(\partial_\sigma' x^\rho)
+\end{equation}
+\section{Tensors}
+An object \(T^{\mu\nu}\) is a tensor if it transforms like a tensor:
+\begin{equation}
+	T'^{\mu\nu} = \Lambda_{\sigma}^\mu\Lambda_\rho^\nu T^{\sigma\rho}
+\end{equation}
+More generally, we can have tensors such as \(W^{\mu\nu}_{\sigma\xi\rho}\).
+\section{Coordinate Transformations}
+In general, we have
+\[\d{x'^\mu} = \pder{x'^\mu}{x^\nu}\d{x^\nu}\]
+\[\d{x^\mu} = \pder{x^\mu}{x'^\nu}\d{x'^\nu}\]
+giving us a representation for our transformation as
+\[S_\nu^\mu(x) = \pder{x'^\mu}{x^\nu}\]
+\[(S^{-1})_\nu^\mu(x) = \pder{x^\mu}{x'^\nu}\]
+And so trivially, we find
+\[(S^{-1})^\mu_\rho S^\rho_\nu = \pder{x^\mu}{x'^\rho}\pder{x'^\rho}{x^\nu} = \pder{x^\mu}{x^\nu} = \delta_\nu^\mu\]
+\section{Area and Volume}
+For a diagonal metric,
+We can write an area element
+\[\d{A} = \d{\ell^1}\d{\ell^2} = \sqrt{g_{11}g_{22}}\d{x^1}\d{x^2}\]
+the 3-volume element
+\[\d{V} = \sqrt{g_{11}g_{22}g_{33}}\d{x^1}\d{x^2}\d{x^3}\]
+and 4-volume element
+\[\d{\mathcal V} = \sqrt{g}\d{x^0}\d{x^1}\d{x^2}\d{x^3}\]
+where 
+\[g = \det(g_{\alpha\beta})\]

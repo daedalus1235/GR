@@ -1,0 +1,117 @@
+%! TEX root = 0-main.tex
+\chapter{Math!}
+\section{Vectors and Manifolds}
+Loosely speaking, a vector is all the ways you can travel through a point on a manifold. More strictly, consider an arbitrary function \(f(t)\) that has the property of passing through a point \(p\) on the manifold \(M\); its tangent vector is given
+\[\der{f}{t} = \der{x^\mu}{t}\frac{\d{f}}{\d{x^\mu}}\]
+We wish to consider all such tangent vectors, for any vector that passes through \(p\), thus, we instead consider
+\[\der{}{t} = \der{x^\mu}{t}\partial_\mu\]
+we consider \(\d{x^\mu}/\d{x}\) to be the component of an arbitrary vector \(\d{}/\d{t}\) and the basis to be \(e_\mu = \partial_\mu\). 
+The space of all of these vectors \(\d{}/\d{t}\) forms the \emph{tangent space} \(T_pM\), and forms a tangent bundle \(TM\) over the entire manifold \(M\).
+
+From our definition of a vector, we see trivially that the transformation for the basis
+\[\partial'_\mu = \pder{x^\nu}{x'^\nu} \partial_\mu\]
+gields the transformation law of the components
+\[V'^\mu = \pder{x'^\mu}{x^\nu}V^\nu\]
+to keep the vector constant.
+
+\section{Dual Vectors, 1-Forms or Covectors}
+Of course, for each tangent space there is an associated \emph{dual space} \(T\ast_p\) which are linear maps from vectors in \(T_p\) to scalars.
+\[T_p\ast\ni \omega : T_p \to \R\]
+that is,
+\[\omega (V) = V^\mu \omega(\partial_\mu) \equiv V^\mu\omega_\mu\]
+More concretely, we can consider the gradient of a function \(f\), \(\d f\), acting along a vector, \(\d{}/\d{t}\), yielding the directional derivative:
+\[\d{f} \der{}{t} = \der{x^\mu}{t}\partial_\mu f\]
+We have a natural basis for the dual vectors coming from
+\[\partial_\mu x^\nu = \delta_\mu ^\nu = \d{x^\nu}\partial_\mu\]
+we can thus write
+\[\omega = \omega_\nu\d{x^\nu}\equiv \omega_\nu f^\nu\]
+We can similarly extract the transformation law for the components of \(\omega\) by
+\[\delta^\mu_\nu = \d{x^\mu}\partial_\nu = \d{x'^\mu}\partial_\nu' = \d{x'^\mu}\pder{x'^\rho}{x^\nu}\partial_\rho\]
+so
+\[\d{x'^\mu}=\pder{x^\mu}{x'^\nu}\d{x^\nu}\]
+and
+\[\omega_\mu' = \pder{x^\nu}{x'^\mu}\omega_\mu\]
+We can relate the action of a 1-form on a vector by
+\[\omega(V) = V^\mu\omega_\nu f^\nu(e_\mu) = V^\mu\omega_\nu\delta^\nu_\mu = V^\mu\omega_\mu = V*\omega = g_{\mu\nu}V^\mu\omega^\nu\]
+and thus, we can raise and lower indices by contracting with the metric:
+\[\omega_\mu = g_{\mu\nu}\omega^\nu\]
+
+\section{Tensors}
+A tensor is just another name for a \emph{multilinear map}. We define a tensor of rank \((r,s)\) as a multilinear map
+\[T\in \L(\underbrace{T_p\ast M\times\cdots\times T_p\ast M}_{\text{\(r\) times}}\times \underbrace{T_p M\times\cdots\times T_p M}_{\text{\(s\) times}}, \R)\]
+Thus, we see that vectors are rank \((1,0)\) vectors, while 1-forms are \((0,1)\) tensors, and the metric is a rank \((0,2)\) tensor.
+
+We can write the components of this map along some basis \(f^\mu, e_\nu\) as:
+\[T\indices{^{\mu_1}^\cdots^{\mu_r}_{\nu_1}_\cdots_{\nu_s}} = T(f^{\mu_1},\ldots,f^{\mu_r}, e_{\nu_1},\ldots,e_{\nu_s})\]
+It is important to know that because \(T\) in general, not a symmetric tensor, the location of the indices is important, as it indicates which argument of the tensor is being used for which vector. For example, consider the application of a rank \((2,1)\) tensor \(A\) on three vectors \(\eta, \omega, x\):
+\[A(\eta,\omega,x) = A(\eta_\mu f^\mu \omega_\nu f^\mu, x^\rho e_\rho) = \eta_\mu \omega_\nu x^\rho A(f^\mu, f^\nu, e_\rho) = A\indices{^\mu^\nu_\rho}\eta_\mu\omega_\nu x^\rho\]
+Tensors inherit their transformation laws from the vectors that define their basis. For example, \(A\) above transforms as
+\[{A'}\indices{^\mu^\nu_\rho} = \pder{x^\mu}{x'^\alpha}\pder{x^\nu}{x'^\beta} \pder{x'^\gamma}{x^\rho}A\indices{^\alpha^\beta_\gamma}\]
+We define indices that transform like the basis \(e_\mu\) to be \emph{covariant}, while bases which transform like the coordinates to be \emph{contravariant}. For example, vectors are contravariant, while 1-forms are covariant.
+
+\section{Derivatives and connections}
+We unfortunately run into an issue when taking the derivative of a vector, \(\omega_\nu V^\mu\). If we transform the basis,
+\begin{align*}
+	\partial_\nu' V'^\mu&=\pder{x^\alpha}{x'^\nu}\partial_\alpha\left(\pder{x'^\mu}{x^\beta}V^\beta\right)\\
+			    &=\pder{x^\alpha}{x'^\nu}\pder{x'^\mu}{x^\beta}(\partial_\alpha V^\beta) + \pder{^2 x'^\mu}{x^\alpha\partial x^\beta}\pder{x^\alpha}{x'^\mu}V^\beta
+\end{align*}
+while the first term is as expected, the second term does not, in general, vanish! Thus, our ``derivative'' \(\partial_\mu\) is not a true derivative; we must define a new derivative which does transform properly---the \emph{covariant derivative}.
+\[\del_\mu V^\nu = \del_\mu V^\nu + \Gamma ^\nu_{\mu\lambda}V^\lambda\]
+The object
+\[[\Gamma_\mu]^\nu_\lambda\]
+is known as the \emph{connection}.
+
+To see why we need this connection, we find that if we embed a manifold into flat space and parallel transport a vector along a curve, the vector no longer lies in the tangent space on a different point along the curve; the connection ``removes'' this component.
+
+We should expect, geometrically, that
+\[\del_\mu V = \pder{}{x^\mu}(v^\lambda e_\lambda) = \pder{V^\lambda}{x_\mu}e_\lambda + V^\lambda \pder{e_\lambda}{x^\mu}\]
+where the first term is from how the component changes, and the second is from the change of basis. Matching this to our definition of the covariant derivative, we obtain the \emph{affine connection}
+\[\Gamma_{\mu\lambda}^\nu e_\nu = \pder{e_\lambda}{x^\mu}\]
+plugging this in, we do obtain the original definition:
+\begin{align*}
+	\del_\mu V&=\partial_\mu V^\lambda e_\lambda + V^\lambda \Gamma_{\mu\lambda}^\nu e_\nu\\
+	\intertext{relabelling indices,}
+		  &=\partial_\mu V^\nu e_\nu + V^\lambda\Gamma_{\mu\lambda^\nu}e_\nu\\
+		  &=\left(\partial_\mu V^\nu + \Gamma_{\mu\lambda}^\nu\right)e_\nu\\
+	\del_\mu V^\nu &= \partial_\mu V^\nu + \Gamma_{\mu\lambda}^\nu V^\lambda
+\end{align*}
+as expected.
+
+We find that the covariant derivative is a derivative, in that it obeys linearity and the leibniz rule:
+\[\del_\nu (V^\mu \omega_\mu) = (\del_\nu V^\mu)\omega_\mu + V^\mu (\del_\nu \omega_\mu)\]
+Further, we expect
+\[\del_\nu (V^\mu\omega_\mu) = \partial_\nu(V^\mu\omega_\nu)\]
+so the covariant derivative of a 1-form is
+\[\del_\mu \omega_\nu  = \partial_\mu \omega_\nu -\Gamma^\lambda_{\mu\nu}\omega_\lambda\]
+It can easily be verified that the covariant derivative transforms properly:
+\[\del_{\mu'} V^{\nu'} = \pder{x^\mu}{x^{\mu'}}\pder{x^{\nu'}}{x^\nu}\del_\mu V^\nu\]
+From this, we can then see that the affine connection is not a true tensor, and transforms as
+\[\Gamma^{\nu'}_{\mu'\lambda'} = \pder{x^\mu}{x^{\mu'}}\pder{x^\lambda}{x^{\lambda'}}\pder{x^{\nu'}}{x^\nu}\Gamma^\nu_{\mu\lambda} + \pder{x^\mu}{x^{\mu'}}\pder{x^\lambda}{x^{\lambda'}}\pder{^2x^{\nu'}}{x^\mu x^\lambda}\]
+We can however consider the \emph{torsion tensor} which is an antisymmetrization of the connection
+\[2\Gamma^\lambda_{[\mu\nu]} = \Gamma^\lambda_{\mu\nu} - \Gamma^\lambda_{\mu\nu}\]
+General relativity is a torsion-free theory, so
+\[\Gamma_{\mu\nu}^\lambda = \Gamma_{\nu\mu}^\lambda = \Gamma^\lambda_{(\mu\nu)}\]
+and further, it has metric compatibility,
+\[\del_\rho g_{\mu\nu} = 0\]
+The combination of being torsion-free and having metric compatibility means that the connection is unique; this connection is the Christoffel connection which appears in Equation~\ref{eq6:geodesic}. We thus have for a locally inertial frame (LIF) that
+\[\del_{\rho}g_{\mu\nu} = \partial_\rho g_{\mu\nu} 0\]
+Evaluating the derivative,
+\[\del_\rho g_{\mu\nu} = \partial_\rho g_{\mu\nu} - \Gamma_{\rho\mu}^\lambda g_{\lambda\nu}-\Gamma_{\rho\nu}^\lambda g_{\mu\lambda}\]
+and cycling the indices, we can obtain the expression for the Cristoffel symbol we have previously learned:
+\[0 = \del_\rho g_{\mu\nu} - \del_\mu g_{\nu\rho} - \del_\nu g_{\rho\mu}\]
+\[\Gamma_{\mu\nu}^\lambda = \frac{1}{2}g^{\lambda\alpha}(\partial_\mu g_{\alpha\nu} + \partial_\nu g_{\mu\alpha} - \partial_\alpha g_{\mu\nu})\]
+
+We can further define a \emph{directional covariant derivative} as
+\[\frac{\operatorname{D}}{\d\tau} = \der{x^\mu}{\tau}\del_\mu = u^\mu\del_\mu\]
+For example, the directional derivative of the unit tangent vector to the geodesic 
+\[u^\mu \del_\mu u^\beta = u^\mu\left[\partial_\mu u^\beta + \Gamma^\beta_{\mu\gamma}u^\gamma\right]= \der{x^\beta}{\tau2} + \Gamma^\beta_{\mu\gamma}u^\mu u^\gamma =0\]
+where the last equality is due to the geodesic equation. Thus, parallel transport along a geodesic keeps a vector parallel to the unit tangent vector; we define paralle transport of a vector \(X\) to be such that
+\[\del_\mu X = 0\]
+
+\section{Curvature}
+Consider a triangle in flat space, where the interior angle adds to \(pi\). If we parallel transport a vector about this curve, the vector gains no angle.
+
+However, if we parallel transport the vector along a triangle in curved space, the vector now differs from the original vector by an angle. Using the commutator of the covariant derivative, we can obtain an expression for the \emph{Riemann Curvature Tensor}
+\[[\del_\mu,\del_\nu]_\sigma V^\rho\]
+\[(\del_u\del_u\xi)^\alpha = -R\indices{^\alpha_\beta_\gamma_\delta}u^\beta\chi^\gamma u^\delta\]
+\[R^\rho_{\sigma\mu\nu} = \partial_\mu \Gamma^\rho_\nu\sigma - \partial_\nu \Gamma^\rho_{\mu\sigma} + \Gamma^\rho_{\mu\lambda}\Gamma^\lambda_{\nu\sigma}-\Gamma^\rho_{\nu\lambda}\Gamma^\lambda_{\mu\sigma}\]

@@ -1,0 +1,57 @@
+%! TEX root = 0-main.tex
+\chapter{Action Principle}
+\section{Variational Principle}
+In ordinary calculus, we extremize a function with respect to variables; in variational calculus, we extremize a functional with respect to its function parameters. For example, consider a string hanging between two points. The potential energy of a particular shape of the string \(\phi\) with boundary conditions \(\phi(\pm L/2) = 0\) can be given by the functional \(E[\phi(x)]\)
+\[E[\phi(x)] = \int_{-L/2}^{L/2} \d{x}\left[\frac{T}{2}\left(\der{\f}{x}\right)^2 -\sigma g \phi\right]\]
+we will consider small deviations from an assumed extrema
+\[\phi \to \phi + \delta\phi\]
+Then
+\[\delta E = E(\phi + \delta\phi) - E(\phi)\]
+Taylor expanding, we obtain
+\[E(\phi+\delta\phi) = \int\d{x}\left[\frac{T}{2}\left(\der{\phi}{t}+\der{\delta\phi}{x}\right)^2-\sigma g(\phi+\delta\phi)\right]\]
+so, keeping only first order terms\footnote{While second order terms in \(\d{\delta\phi}/\d{x}\) don't necessarily vanish, we will assume they do.},
+\[\delta E = \int\d{x} T \left(\der{\phi}{x} \der{\delta\phi}{x}\right) -\sigma g \delta\phi\]
+Integrating by parts, and discarding boundary conditions, we find
+\[\delta E = \int\d{x}\left(-T \der{\phi}{x2}-\sigma g\right)\delta\phi\]
+Thus, we have
+\[\frac{\delta E}{\delta\phi} = -T\der{\phi}{x2}-\sigma g = 0\]
+The solution to this shows that the energy is extremized with \(\phi\) a parabola.
+\begin{aside}[Sidenote of Variations]
+	Note that we can compute
+	\[\delta\der{\phi}{x} = \der{}{x}(\phi+\delta\phi) -\der{\phi}{x} = \der\phi{x} + \der{\delta\phi}{x}-\der\phi{x} = \der{\delta\phi}{x}\]
+	so we can show that
+	\[\delta\der{\phi}{x} = \der{\delta\phi}{x}\]
+\end{aside}
+As another example, from the energy functional for the gravitational potential and a mass density \(\rho\), 
+\[E[\phi] = \int\d[3]{x}\left[\frac{1}{8\pi G}(\del \phi)^2 + \rho\phi\right]\]
+we can take a variation to obtain Poisson's equation.
+\[\del^2\phi = 4\pi G\rho\]
+
+\subsection{Newton's Law}
+Recall that we showed that Newton's Law is invariant under translation and rotation, but not under constant rotation. Rewriting as a covariant equation,
+\[m\der{x^i}{t2} = F^i\]
+Further, we can write the force in terms of the potential as
+\[F^i= -\partial^i V\]
+Multiplying by velocity, we obtain
+\[m\ddot x^i \dot x^i= -\partial_i V\dot x^i\]
+or
+\[\der{}{t}\left[\frac{1}{2}m\der{x^i}{t}\der{x^i}{t} +V(x)\right] =0\]
+so energy is conserved.
+\section{Action Principle}
+Newton's law can be derived from the action functional 
+\begin{equation}
+	S[q] = \int_0^T L(q,\dot q, t)\d{t} \label{eq:action}
+\end{equation}
+That is, we can determine the trajectory of a particle by extremizing its action; this is the \emph{principle of least action}.
+\begin{equation}
+	\delta S = 0
+\end{equation}
+Take the Lagrangian to be that of a particle in a gravitational field:
+\[L = \frac{1}{2}m\dot q^2 - mgq\]
+We have already solved this problem in our hanging string. Substituting variables, we obtain Newton's law:
+\[m\ddot q  = -mg = -V'\]
+When we take the variation of an arbitrary Lagrangian as in Equation~\ref{eq:action}, we obtain the Euler-Lagrange equation
+\begin{equation}
+	\der{}{t}\pder{L}{\dot q} -\pder{L}{q} = 0
+\end{equation}
+

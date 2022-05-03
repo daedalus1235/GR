@@ -1,0 +1,174 @@
+%! TEX root = 0-main.tex
+\chapter{Mechanics in SR}
+\section{Vectors}
+\subsubsection{Lower Indices}
+Before we begin studying mechanics in special relativity, we will expand the toolkit with which we have to deal with vectors.
+\[\d{s}^2 = \eta_{\mu\nu}\d{x^\mu}\d{x^\nu}\]
+From this, we define the notion of \emph{lowering an index} as
+\[\d{s}^2 = \d{\vb x}*\d{\vb x} = \d{x_\mu}\d{x^\mu} = (\eta_{\mu\nu}\d{x^\nu}) \d{x^\mu}\]
+or more generally
+\begin{subequations}
+	\begin{align}
+		\d{x_\mu} &= \eta_{\mu\nu}\d{x^\nu}\\
+		\d{x^\mu} &= \eta^{\mu\nu}\d{x_\nu}
+	\end{align}
+\end{subequations}
+where
+\begin{equation}
+	\eta^{\mu \kappa}\eta_{\kappa\nu} = \delta_\nu^\mu	
+\end{equation}
+Note: this definition enforces that \(\eta_\nu^\mu\) \emph{does not exist.}
+
+\subsection{Vector Quantities}
+The position 4-vector is given
+\begin{equation}
+	x^\mu= (t,x,y,z)
+\end{equation}
+From the definition of proper time, we see that we can find a velocity 4-vector given
+\[\d\tau^2 = -\eta_{\mu\nu}\d{x^\mu}\d{x^\nu}\]
+\begin{subequations}
+\begin{equation}
+	u^\mu = \der{x^\mu}{\tau}
+\end{equation}
+we find that 
+\[u^0 = \der{t}{\tau} = \frac{\d{t}}{\sqrt{\d{t}^2- \d{\vb x}^2}} = \frac{1}{\sqrt{1-\left(\der{\vb x}{t}\right)^2}}\]
+We recognize \(\d{\vb x}/\d{t} = \vb v_N\) the newtonian velocity. Thus,
+\begin{equation}
+	u^\mu =(\gamma,\gamma\vb v_N)
+\end{equation}
+We trivially find a normalization condition\footnote{If we include factors of \(c\), we find that \(u^\mu = (\gamma c, \gamma\vb v_N)\) and \(u_\mu u^\mu = -c^2\)}
+\begin{equation}
+	u_\mu u^\mu = -1
+\end{equation}
+\end{subequations}
+Importantly, we found that 
+\begin{equation}
+	\boxed{\gamma = \der{t}{\tau}}
+\end{equation}
+Multiplying \(u^\mu\) by mass, we obtain the 4-momentum
+\begin{subequations}
+	\begin{equation}
+		p^\mu = m u^\mu
+	\end{equation}
+	The first term\footnote{and that \(p^0 = \gamma mc = E/c\)} we recognize as the energy
+	\[p^0 = \gamma m \to mc^2 + \frac{1}{2}m\vb v_N^2 + \mathscr O(\vb v_N^4) = E\]
+	From the normalization of 4-velocity, we trivially find\footnote{and that \(p_\mu p^\mu = -m^2 c^2\)}
+	\begin{equation}
+		p_\mu p^\mu = -m^2
+	\end{equation}
+	which, expanding out (and fixing \(\gamma = 1\)), we recover Einstein's famous energy-mass equivalence
+	\[E^2-\vb p^2 = m^2\]
+\end{subequations}
+
+\begin{aside}[Light]
+	Consider a reparametrization of light in terms of \(\lambda\) (we must do this because \(\d{\tau} = 0\)) as
+	\[u^\mu = \der{x^\mu}{\lambda}\]
+	Then we have
+	\[u_\mu u^\mu = 0\]
+	and 
+	\begin{subequations}
+	\begin{align}
+		E &=\hbar\omega\\
+		\vb p&= \hbar \vb k\\
+		p^\mu&=\hbar k^\mu
+	\end{align}
+	so
+	\begin{equation}
+		k_\mu k^\mu = 0
+	\end{equation}
+\end{subequations}
+\end{aside}
+
+Consider the collision of a photon \(k^\mu\) with a stationary particle \(p^\mu\). Because momentum is conserved
+\[k^\mu+p^\mu=  k'^\mu + p'^\mu\]
+In the lab frame, the particle has 4-momentum
+\[p^\mu = (m,0)\]
+To make this a lorentz invariant, we consider
+\[k'_\mu p^\mu = -m\omega'\]
+Substituting our conservation of momentum,
+\[-m\omega' = k'_\mu (k'^\mu + p'^\mu - k^\mu)\]
+The first term goes to zero. Squaring momentum conservation, we additionally find
+\[k_\mu k^\mu+ 2 k_\mu p^\mu + p_\mu p^\mu = k'_\mu k'^\mu+ 2k'\mu p'^\mu - p'_\mu p'^\mu\]
+or substituting invariants for momentum and wavevector,
+\[k_\mu p^\mu = k'_\mu p'^\mu\]
+Substitiuting into our invariant,
+\[k'_\mu p^\mu = k_\mu p^\mu - k'_\mu k^\mu\]
+Evaluating (and negating),
+\[m\omega' = m\omega - (\omega'\omega - \vb k'*\vb k)\]
+or
+\[m\omega'=  m\omega - \omega\omega f(1-\cos\theta)\]
+note that the second term results from \(c = \omega/k = 1\). Thus, we obtain
+\[\omega ' = \frac{\omega}{1+\frac{\omega}{m}\left(1-\cos\theta\right)}\]
+
+\section{Relativistic Action}
+First, consider the case where there is no potential; the free particle. Consider the item with the closest form to the action---the proper time:
+\begin{align*}
+	S&\stackrel{?}{=} \int\d{\tau}\\
+	 &= \int\d{t}\sqrt{1-\left(\der{\vb x}{t}\right)^2}\\
+	&\to-\int\d{t}-1+\frac{1}{2}\left(\der{\vb x}{t}\right)^2+\dots
+	\intertext{Comparing to the classical Lagrangian, we note we are missing a mass term. Multiplying,}
+	S&=-mc\int\d{t}\sqrt{c^2-\left(\der{\vb x}{t}\right)^2}\\
+	 &=\int\d{t}\left[\frac{1}{2}mv^2 - mc^2+\dots\right]
+\end{align*}
+And so we recover the classical lagrangian with a rest mass energy term.
+
+We thus define the action of a free particle as 
+\begin{equation}
+	S = -m\int\d{\tau} = -m\int\sqrt{-\eta_{\mu\nu}\d{x^\mu}\d{x^\nu}}
+\end{equation}
+Rewritting,
+\[S = -m\int\d\sigma\sqrt{-\eta_{\mu\nu}\der{x^\mu}{\sigma}\der{x^\nu}{\sigma}}\]
+and so our Lagrangian can be written in terms of the invariant
+\begin{equation}
+	L= -m\sqrt{-\eta_{\mu\nu}\der{x^\mu}{\sigma}\der{x^\nu}{\sigma}}
+\end{equation}
+for some parameter \(\sigma\). Fixing \(\sigma = \tau\), we find
+\[L = \der{\tau}{\sigma} = 1\]
+Applying Euler's equation, we obtain
+\[\der{}{\sigma}\left(\der{\sigma}{\tau}\eta_{\mu\lambda} \der{x^\mu}{\tau}\right) = 0\]
+so
+\[\der{x^\mu}{\tau2}= 0\]
+or the worldline of a free particle is a straight line.
+
+For a massless particle, such as light, we can reparametrize the action
+\[\tilde S = \int\d{\xi}\sqrt{\eta_{\mu\nu}\der{x^\mu}{\xi}\der{x^\nu}{\xi}}\]
+\subsection{Potentials}
+When we wish to add a potential, we can add it in one of two places; either inside the square root of the action or as second term in the lagrangian. The former provides more GR forces, while the latter more EM forces.
+
+\subsubsection{Gravity-like}
+Consider a perturbative term to the time component:
+\begin{align*}
+	S& = -m\int\sqrt{\left(1+\frac{2V}{m}\right) \d{t}^2-\d{\vb x}^2}
+	\intertext{We can assume the separation is timelike; in the non-relativistic limit, we find \(\d{t}\gg \norm{\d{\vb x}}\). Thus,}
+	 &\to-m\int\sqrt{1+\frac{2V}{m}}\d{t}-\frac{\d{\vb x}^2}{2\sqrt{1+\frac{2V}{m}}\d{t}}
+	 \intertext{Further, with \(V\ll c\) we can expand \(\sqrt{1+2V/m}\to 1+V/m\). Keeping only first order terms,}
+	 &\to-m\int\left[1+\frac{V}{m}\right]\d{t}-\frac{\d{\vb x}^2}{2\d{t}}\\
+	 &=\int\d{t}\left[\frac{1}{2}m\left(\der{\vb x}{t}\right)^2 - V - m\right]
+\end{align*}
+which yields us our classical lagrangian. We note that the form of our perturbation can be written as
+\[g(x)\d{t}^2-\tilde g(x)\d{\vb x}^2\]
+however, \emph{this does not transform like a tensor}; the lorentz boost would necessarily create cross terms with cross terms \(g\tilde g\d{x}\d{t}\).
+
+Rather, we promote this object to a true metric
+\[g_{00}= -\left(1+\frac{2V}{m}\right)\quad g_{i0}=0=g_{0i}\quad g_{ij} = \delta_{ij}\]
+which keeps the action lorentz invariant. Note that now, we can easily see that the stronger a potential
+\[V\to -\frac{GM}{r}\]
+the more the proper time is affected. Indeed, noticing that for a stationary particle \(\d{\vb x} = 0\), we find
+\[\d\tau = \sqrt{1-\frac{2GM}{r}}\d{t}\]
+and so clocks in a gravitational potential run slow; i.e.\ \(\d\tau<\d t\).
+
+From this we can derive graviational redshift. To first order, we have
+\[\d\tau = (1+\phi(x))\d{t}\]
+and so we find 
+\[\omega(x)\sim \frac{1}{1+\phi} \sim 1-\phi\]
+so
+\[\frac{\omega_f}{\omega_i} \sim \frac{1-\phi_f}{1-\phi_i} \sim 1-\phi_f +\phi_i\]
+and thus
+\[\frac{\omega_f - \omega_i}{\omega_i} = -\frac{\phi_f-\phi_i}{c^2}\]
+
+\subsubsection{EM-like}
+We now consider a potential outside the square root. We promote the potential to a lorentz invariant quantity by converting it to a 4-potential and obtain the action
+\begin{equation}
+	S = -m\int\sqrt{-\eta_{\mu\nu}\d{x^\mu}\d{x^\nu}} + A_\mu(x) \d{x^\mu}
+\end{equation}
+where \(A_0 (x)= -V(x)\) to maintain consistency with the non-relativistic action. When we vary \(x^\mu \to x^\mu +\delta x^\mu\) we recover the lorentz force law; when we vary \(A_\mu\to A_\mu+\delta A_\mu\) we obtain Maxwell's Field Equations.
